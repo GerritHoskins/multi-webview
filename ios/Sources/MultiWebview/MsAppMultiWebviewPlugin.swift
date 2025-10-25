@@ -3,9 +3,12 @@ import Capacitor
 import WebKit
 
 @objc(MsAppMultiWebviewPlugin)
-public class MsAppMultiWebviewPlugin: CAPPlugin {
+public class MsAppMultiWebviewPlugin: CAPPlugin, CAPBridgedPlugin {
 
     private let manager = MsAppMultiWebviewManager()
+
+    public let identifier = "MsAppMultiWebviewPlugin"
+    public let jsName = "MsAppMultiWebview"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "createWebview", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "setFocusedWebview", returnType: CAPPluginReturnPromise),
