@@ -135,6 +135,16 @@ class TagManagementWKWebView: NSObject, TagManagementProtocol, LoggingDataToStri
                 self.enableCompletion?(false, WebviewError.webviewNotInitialized)
                 return
             }
+
+            // Register with multi-webview plugin for centralized management
+            #if CAPACITOR
+            TealiumMultiWebviewIntegration.shared.registerTealiumWebview(
+                webview,
+                url: url?.absoluteString,
+                frame: .zero
+            )
+            #endif
+
             // attach the webview to the view before continuing
             self.attachToUIView(specificView: specificView)
             guard let url = url else {
@@ -292,6 +302,12 @@ class TagManagementWKWebView: NSObject, TagManagementProtocol, LoggingDataToStri
     /// Called when the module needs to disable the webview.
     func disable() {
         self.delegates = nil
+
+        // Unregister from multi-webview plugin
+        #if CAPACITOR
+        TealiumMultiWebviewIntegration.shared.unregisterTealiumWebview()
+        #endif
+
         // these method MUST be called on the main thread. If async, self will be deallocated before this runs, so we capture the webview instead
         guard let webview = self.webview else {
             return
