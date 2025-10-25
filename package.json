@@ -1,0 +1,86 @@
+{
+    "name": "@ms-app/multi-webview",
+    "version": "1.1.0",
+    "type": "module",
+    "description": "Capacitor plugin for managing multiple web views with programmatic focus control",
+    "main": "dist/plugin.cjs.js",
+    "module": "dist/esm/index.js",
+    "types": "dist/esm/index.d.ts",
+    "unpkg": "dist/plugin.js",
+    "files": [
+        "android/src/main/",
+        "android/build.gradle",
+        "dist/",
+        "ios/Plugin/",
+        "MsAppMultiWebview.podspec"
+    ],
+    "author": "",
+    "license": "MIT",
+    "repository": {
+        "url": "https://git.meinestadt.de/external-dev/meinestadt-mobile-application/v3/ms-app.git"
+    },
+    "bugs": {
+        "url": "https://git.meinestadt.de/issues"
+    },
+    "keywords": [
+        "capacitor",
+        "plugin",
+        "native",
+        "webview",
+        "multi-webview"
+    ],
+    "scripts": {
+        "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
+        "verify:ios": "xcodebuild build -scheme MsAppsBrowser -sdk iphonesimulator17.0 -destination 'OS=17.0,name=iPhone 15'",
+        "verify:android": "cd android && ./gradlew clean build test && cd ..",
+        "verify:web": "npm run build",
+        "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
+        "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
+        "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
+        "swiftlint": "node-swiftlint",
+        "docgen": "docgen --api BrowserPlugin --output-readme README.md --output-json dist/docs.json",
+        "build": "tsc && rollup -c rollup.config.mjs",
+        "clean": "rimraf ./dist",
+        "watch": "tsc --watch",
+        "prepublishOnly": "npm run build",
+        "publish:cocoapod": "pod trunk push ./MsAppMultiWebview.podspec --allow-warnings",
+        "test:unit": "vitest --run",
+        "test:unit:coverage": "vitest --run --coverage",
+        "test:unit:watch": "vitest --watch"
+    },
+    "devDependencies": {
+        "@capacitor/android": "7.1.0",
+        "@capacitor/core": "7.1.0",
+        "@capacitor/docgen": "0.3.0",
+        "@capacitor/ios": "7.1.0",
+        "@ionic/prettier-config": "^4.0.0",
+        "@ionic/swiftlint-config": "2.0.0",
+        "@ms-app/configuration-eslint": "workspace:*",
+        "@ms-app/configuration-vitest": "workspace:*",
+        "@vitest/coverage-v8": "3.0.8",
+        "eslint": "9.9.1",
+        "prettier": "3.3.2",
+        "prettier-plugin-java": "2.6.6",
+        "rimraf": "6.0.1",
+        "rollup": "4.30.1",
+        "swiftlint": "2.0.0",
+        "typescript": "5.5.4",
+        "vitest": "3.0.8"
+    },
+    "peerDependencies": {
+        "@capacitor/core": ">=7.0.0"
+    },
+    "prettier": "@ionic/prettier-config",
+    "swiftlint": "@ionic/swiftlint-config",
+    "capacitor": {
+        "ios": {
+            "src": "ios"
+        },
+        "android": {
+            "src": "android"
+        }
+    },
+    "publishConfig": {
+        "access": "public"
+    }
+}
