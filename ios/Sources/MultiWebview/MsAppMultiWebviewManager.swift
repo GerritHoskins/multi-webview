@@ -24,7 +24,7 @@ class WebviewContainer {
 
 class MsAppMultiWebviewManager: NSObject, WKNavigationDelegate, WKScriptMessageHandler {
     weak var plugin: CAPPlugin?
-    private var webviews: [String: WebviewContainer] = [:]
+    internal var webviews: [String: WebviewContainer] = [:]
     private var focusedWebviewId: String?
 
     func createWebview(
