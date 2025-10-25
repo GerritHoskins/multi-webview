@@ -5,7 +5,8 @@ import WebKit
 @objc(MsAppMultiWebviewPlugin)
 public class MsAppMultiWebviewPlugin: CAPPlugin, CAPBridgedPlugin {
 
-    private let manager = MsAppMultiWebviewManager()
+    /// The webview manager - exposed for external integrations (e.g., Tealium)
+    public let manager = MsAppMultiWebviewManager()
 
     public let identifier = "MsAppMultiWebviewPlugin"
     public let jsName = "MsAppMultiWebview"
