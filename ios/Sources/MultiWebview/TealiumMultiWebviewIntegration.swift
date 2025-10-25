@@ -216,7 +216,7 @@ extension MsAppMultiWebviewManager {
     ///   - webview: Pre-existing WKWebView instance
     ///   - url: Current or initial URL (optional)
     /// - Throws: MsAppMultiWebviewError if webview with ID already exists
-    func registerExternalWebview(id: String, webview: WKWebView, url: String?) throws {
+    @objc func registerExternalWebview(id: String, webview: WKWebView, url: String?) throws {
         if webviews[id] != nil {
             throw MsAppMultiWebviewError.webviewAlreadyExists
         }
@@ -235,7 +235,7 @@ extension MsAppMultiWebviewManager {
     ///   - id: Identifier of the webview
     ///   - url: New URL string (optional)
     /// - Throws: MsAppMultiWebviewError if webview not found
-    func updateWebviewUrl(id: String, url: String?) throws {
+    @objc func updateWebviewUrl(id: String, url: String?) throws {
         guard let container = webviews[id] else {
             throw MsAppMultiWebviewError.webviewNotFound
         }
@@ -246,7 +246,7 @@ extension MsAppMultiWebviewManager {
     ///
     /// - Parameter id: Webview identifier
     /// - Returns: Bool indicating if webview is registered
-    func webviewExists(id: String) -> Bool {
+    @objc func webviewExists(id: String) -> Bool {
         return webviews[id] != nil
     }
 }
