@@ -1,0 +1,4 @@
+dist
+.github
+android/src/androidTest
+android/src/test
