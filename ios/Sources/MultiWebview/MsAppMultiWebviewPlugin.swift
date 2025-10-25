@@ -28,6 +28,8 @@ public class MsAppMultiWebviewPlugin: CAPPlugin, CAPBridgedPlugin {
 
     override public func load() {
         manager.plugin = self
+        // Configure Tealium integration
+        TealiumMultiWebviewIntegration.shared.configure(manager: manager, plugin: self)
         super.load()
     }
 
